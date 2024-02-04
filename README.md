@@ -2,6 +2,7 @@
 
 This project was about tackling the classic Dinig Philosophers Problem, using threads and mutexes.
 https://en.wikipedia.org/wiki/Dining_philosophers_problem
+
 I learned the basics of threading a process, from creating threads to working with mutexes.
 
 Score: 100/100
