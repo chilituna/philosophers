@@ -8,6 +8,9 @@ This project implements the classic Dining Philosophers concurrency challenge us
 
 It was built to practice writing thread-safe systems code, coordinate shared resources (forks), and handle real-time constraints (eat/sleep/die timing) without race conditions or deadlocks. The simulation also includes robust argument validation and controlled shutdown when a philosopher dies or all required meals are completed.
 
+**42 Berlin project:** `philosophers`  
+**Score:** `100/100`
+
 <!-- ## Demo / Screenshots
 
 Add your visuals here:
@@ -117,6 +120,17 @@ philosophers/
 - Improve scheduler fairness and reduce busy-wait sections.
 - Add optional logging modes (minimal vs verbose).
 - Include benchmark notes for larger philosopher counts.
+
+## References & Testing Tools
+
+- Dining Philosophers background: [Wikipedia - Dining Philosophers Problem](https://en.wikipedia.org/wiki/Dining_philosophers_problem)
+- Threading fundamentals: [CodeVault Lesson](https://code-vault.net/course/07hdekibo8:1603733520293/lesson/18ec1942c2da46840693efe9b51d86a8)
+- Helpful walkthrough: [YouTube - Jamshidbek Ergashev](https://www.youtube.com/watch?v=UGQsvVKwe90)
+- Helpful walkthrough: [YouTube - Oceano](https://www.youtube.com/watch?v=zOpzGHwJ3MU)
+- Reference implementation: [TommyJD93/Philosophers](https://github.com/TommyJD93/Philosophers)
+- Tester: [nesvoboda/socrates](https://github.com/nesvoboda/socrates)
+- Tester: [MichelleJiam/LazyPhilosophersTester](https://github.com/MichelleJiam/LazyPhilosophersTester)
+- Visualizer: [philosophers-visualizer](https://nafuka11.github.io/philosophers-visualizer/)
 
 ## What I Learned
 
