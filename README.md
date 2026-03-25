@@ -1,81 +1,85 @@
-# Philosophers
+![Philosophers](images/philosophers_banner.png)
 
-A multithreaded C simulation of the Dining Philosophers problem that demonstrates synchronization, shared-state safety, and timing-sensitive concurrency control.
+A multithreaded C implementation of the [Dining Philosophers problem](https://en.wikipedia.org/wiki/Dining_philosophers_problem) focused on safe synchronization, timing accuracy, and clean concurrent system design.
 
 ## Overview
 
-This project implements the classic Dining Philosophers concurrency challenge using POSIX threads and mutexes.
+`Philosophers` is a systems programming project from 42 Berlin that recreates the classic concurrency challenge where multiple threads compete for shared resources.
 
-It was built to practice writing thread-safe systems code, coordinate shared resources (forks), and handle real-time constraints (eat/sleep/die timing) without race conditions or deadlocks. The simulation also includes robust argument validation and controlled shutdown when a philosopher dies or all required meals are completed.
+The project was built to practice:
+- Writing thread-safe C code with POSIX threads and mutexes
+- Preventing race conditions and deadlocks in resource sharing
+- Designing reliable monitoring and shutdown logic for real-time constraints
 
-**42 Berlin project:** `philosophers`  
-**Score:** `100/100`
+Achieved score: **100/100**
 
-<!-- ## Demo / Screenshots
+## Demo / Screenshots
 
-Add your visuals here:
+> Add visuals here for your GitHub portfolio:
 
-![Terminal Demo Placeholder](docs/demo-terminal.gif)
-![Simulation Output Placeholder](docs/screenshot-output.png)
+- `docs/demo.gif` - short simulation run (recommended)
+- `docs/output-sample.png` - terminal output snapshot
+- `docs/edge-case-test.png` - one stress or edge-case scenario
 
-Example run command:
+Example command shown in demo:
 
 ```bash
 ./philo 5 800 200 200 7
-```-->
+```
 
 ## Tech Stack
 
-- C
-- POSIX Threads (`pthread`)
-- POSIX Mutexes
-- GNU Make
-- Linux/Unix system APIs (`gettimeofday`, `usleep`)
+- **Language:** C
+- **Concurrency:** POSIX Threads (`pthread`)
+- **Synchronization:** POSIX Mutexes
+- **Build:** GNU Make
+- **System APIs:** `gettimeofday`, `usleep`
+- **Platform:** Linux / Unix
 
 ## Architecture / Implementation
 
-Core design is split into small modules with clear responsibilities:
+The codebase is organized into focused modules with clear responsibilities:
 
-- `main.c`: Program flow, thread creation/join, simulation lifecycle.
-- `init.c`: Initialization of shared data, philosophers, forks, and mutexes.
-- `monitor.c`: Central monitoring loop that detects death/completion and stops simulation.
-- `utils.c`: Time handling, precise sleep loop, and synchronized logging.
-- `check.c`: CLI argument parsing and input validation.
-- `destroy.c` / `error_exit.c`: Cleanup paths for normal exit and error handling.
+- `main.c`: Program entrypoint, thread lifecycle, simulation flow
+- `init.c`: Initialization of shared state, philosophers, forks, and mutexes
+- `monitor.c`: Central monitor for death detection and completion conditions
+- `utils.c`: Timing helpers, precise sleeping, synchronized logging
+- `check.c`: CLI input validation and argument checks
+- `destroy.c` + `error_exit.c`: Resource cleanup and failure paths
 
-Key technical decisions:
+Key implementation decisions:
 
-- Per-fork mutexes protect fork ownership.
-- Per-philosopher mutexes protect mutable philosopher state (`last_meal`, `finished`).
-- A dedicated monitor checks starvation based on elapsed milliseconds.
-- Fork acquisition order alternates by philosopher ID (odd/even) to reduce circular wait pressure.
-- A print mutex serializes logs to keep output readable and race-free.
+- One mutex per fork to protect exclusive ownership
+- One mutex per philosopher to guard mutable state (`last_meal`, `finished`)
+- A dedicated monitor loop to enforce starvation timing guarantees
+- Alternating fork pickup order (odd/even philosophers) to reduce circular wait risk
+- A print mutex to keep logs readable and free of interleaving
 
 ## Features
 
-- Configurable simulation via CLI arguments.
-- Optional meal target to stop when all philosophers have eaten enough.
-- Starvation detection with millisecond precision.
-- Synchronized, timestamped state output.
-- Input validation with clear error messages.
-- Graceful resource cleanup (threads, mutexes, allocated memory).
+- Configurable simulation through command-line arguments
+- Optional meal target (`number_of_times_each_philosopher_must_eat`)
+- Millisecond-based starvation detection
+- Thread-safe, timestamped status output
+- Robust argument validation and error handling
+- Graceful cleanup of threads, mutexes, and allocated memory
 
 ## Getting Started
 
-### Prerequisites
-
-- GCC or Clang
-- `make`
-- POSIX-compatible environment (Linux/macOS)
-
-### Build
+### 1. Clone the repository
 
 ```bash
-cd philo
+git clone https://github.com/chilituna/philosophers.git
+cd philosophers/philo
+```
+
+### 2. Build
+
+```bash
 make
 ```
 
-### Run
+### 3. Run
 
 ```bash
 ./philo number_of_philosophers time_to_die time_to_eat time_to_sleep [number_of_times_each_philosopher_must_eat]
@@ -87,7 +91,7 @@ Example:
 ./philo 5 800 200 200 5
 ```
 
-### Clean
+### 4. Clean build files
 
 ```bash
 make clean
@@ -99,6 +103,7 @@ make fclean
 ```text
 philosophers/
 ├── README.md
+├── LICENSE
 └── philo/
     ├── Makefile
     ├── includes/
@@ -115,27 +120,20 @@ philosophers/
 
 ## Future Improvements
 
-- Add CI workflow for build, sanitizers, and thread checks.
-- Add structured test scenarios and expected-output checks.
-- Improve scheduler fairness and reduce busy-wait sections.
-- Add optional logging modes (minimal vs verbose).
-- Include benchmark notes for larger philosopher counts.
-
-## References & Testing Tools
-
-- Dining Philosophers background: [Wikipedia - Dining Philosophers Problem](https://en.wikipedia.org/wiki/Dining_philosophers_problem)
-- Threading fundamentals: [CodeVault Lesson](https://code-vault.net/course/07hdekibo8:1603733520293/lesson/18ec1942c2da46840693efe9b51d86a8)
-- Helpful walkthrough: [YouTube - Jamshidbek Ergashev](https://www.youtube.com/watch?v=UGQsvVKwe90)
-- Helpful walkthrough: [YouTube - Oceano](https://www.youtube.com/watch?v=zOpzGHwJ3MU)
-- Reference implementation: [TommyJD93/Philosophers](https://github.com/TommyJD93/Philosophers)
-- Tester: [nesvoboda/socrates](https://github.com/nesvoboda/socrates)
-- Tester: [MichelleJiam/LazyPhilosophersTester](https://github.com/MichelleJiam/LazyPhilosophersTester)
-- Visualizer: [philosophers-visualizer](https://nafuka11.github.io/philosophers-visualizer/)
+- Add CI checks (build + thread sanitizer / helgrind profiles)
+- Create a small automated test matrix for edge cases
+- Improve scheduling fairness under heavy load
+- Add optional log modes (`minimal`, `verbose`, `debug`)
+- Include benchmark notes for larger philosopher counts
 
 ## What I Learned
 
-- Designing and debugging multithreaded C applications.
-- Preventing race conditions with fine-grained mutex usage.
-- Coordinating shared resources under timing constraints.
-- Building reliable startup/shutdown flows for concurrent systems.
-- Structuring low-level projects into maintainable modules.
+- Practical multithreading patterns in C using `pthread`
+- Mutex strategy design for shared-state consistency
+- Debugging timing-sensitive concurrency issues
+- Structuring low-level projects for maintainability
+- Building deterministic shutdown logic in concurrent programs
+
+## License
+
+This project is licensed under the MIT License. See [LICENSE](LICENSE) for details.
