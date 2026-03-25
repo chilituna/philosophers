@@ -15,17 +15,18 @@ Achieved score: **100/100**
 
 ## Demo / Screenshots
 
-> Add visuals here for your GitHub portfolio:
+### Argument Validation
 
-- `docs/demo.gif` - short simulation run (recommended)
-- `docs/output-sample.png` - terminal output snapshot
-- `docs/edge-case-test.png` - one stress or edge-case scenario
+![Argument validation demo](images/philo_args.gif)
 
-Example command shown in demo:
+### Philosopher Dies
 
-```bash
-./philo 5 800 200 200 7
-```
+![Philosopher death demo](images/philo_death.gif)
+
+### All Philosophers Finished
+
+![Simulation completion demo](images/philo_finished.gif)
+
 
 ## Tech Stack
 
