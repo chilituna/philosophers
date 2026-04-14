@@ -1,4 +1,4 @@
-![Philosophers](images/philosophers_banner.png)
+![Philosophers](images/philosophers_banneri.png)
 
 A multithreaded C implementation of the [Dining Philosophers problem](https://en.wikipedia.org/wiki/Dining_philosophers_problem) focused on safe synchronization, timing accuracy, and clean concurrent system design.
 
